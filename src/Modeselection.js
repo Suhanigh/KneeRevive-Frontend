@@ -1,149 +1,121 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, Button, Grid, Paper, Container, useTheme, useMediaQuery } from '@mui/material';
 import ShieldIcon from '@mui/icons-material/Shield';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
-import { useNavigate } from 'react-router-dom'; // 🔁 Add this for navigation
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from './firebase';
 
 const ModeSelection = () => {
   const theme = useTheme();
   const isLaptop = useMediaQuery('(min-width:1024px)');
-  const navigate = useNavigate(); // 🔁 Initialize navigate
+  const navigate = useNavigate();
+
+  const [userEmail, setUserEmail] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserEmail(user.email);
+      } else {
+        navigate('/');
+      }
+    });
+    return () => unsubscribe();
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  const handleNavigate = (mode) => {
+    navigate(`/${mode}`);
+  };
 
   return (
     <Box 
       sx={{ 
         minHeight: '100vh', 
-        backgroundColor: '#f9fafb', 
+        backgroundColor: '#0d1b2a', 
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
         py: { xs: 4, md: 6 }
       }}
     >
       <Container maxWidth="lg">
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+          <Typography variant="h6" color="#ffffff" fontWeight={600}>
+            {userEmail ? `Welcome, ${userEmail}` : "Loading..."}
+          </Typography>
+          <Button
+            onClick={handleLogout}
+            variant="outlined"
+            sx={{ textTransform: 'none', fontWeight: 600, color: '#ff6f61', borderColor: '#ff6f61', '&:hover': { backgroundColor: '#ff6f61', color: '#ffffff' } }}
+            startIcon={<LogoutIcon />}
+          >
+            Logout
+          </Button>
+        </Box>
 
-        {/* Header Section */}
         <Box sx={{ mb: { xs: 4, md: 6 }, textAlign: 'center' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
-            <HealthAndSafetyIcon sx={{ fontSize: 40, color: '#1976d2', mr: 1 }} />
+            <HealthAndSafetyIcon sx={{ fontSize: 40, color: '#ff6f61', mr: 1 }} />
             <Typography 
               variant="h3" 
               component="h1" 
-              sx={{ fontWeight: 700, color: '#1a2c42', fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' } }}
+              sx={{ fontWeight: 700, color: '#ffffff', fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' } }}
             >
-              KneeAI
+              KneeRevive
             </Typography>
           </Box>
           <Typography 
             variant="subtitle1" 
-            sx={{ color: '#637381', maxWidth: '600px', mx: 'auto', fontSize: { xs: '1rem', md: '1.1rem' } }}
+            sx={{ color: '#a0aec0', maxWidth: '600px', mx: 'auto', fontSize: { xs: '1rem', md: '1.1rem' } }}
           >
             Your Advanced Virtual Physiotherapy Assistant for Personalized Knee Rehabilitation
           </Typography>
         </Box>
 
-        {/* Mode Selection Cards */}
-        <Grid container spacing={{ xs: 3, md: 4 }} justifyContent="center" sx={{ mb: 6 }}>
-
-          {/* Therapy Mode */}
-          <Grid item xs={12} md={6} lg={5}>
-            <Paper 
-              elevation={isLaptop ? 2 : 1} 
-              sx={{ 
-                p: { xs: 3, md: 4 }, 
-                borderRadius: 2,
-                height: '100%',
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
-                }
-              }}
-            >
-              <Box display="flex" alignItems="center" mb={2}>
-                <FavoriteIcon sx={{ color: '#1976d2', mr: 1.5, fontSize: 28 }} />
-                <Typography variant="h5" fontWeight="700" color="#1a2c42">
-                  Therapy Mode
-                </Typography>
-              </Box>
-              <Typography variant="body1" color="#637381" fontWeight="500" mb={2}>
-                Access comprehensive historical data, assessments, and insights.
-              </Typography>
-              <Typography variant="body2" color="#637381" mb={4} sx={{ lineHeight: 1.6 }}>
-                Review your past knee movement data, analyze recovery trends, and understand your progress over time. Get AI-generated assessments and personalized recommendations based on your rehabilitation history.
-              </Typography>
-              <Button
-                fullWidth
-                variant="contained"
-                size="large"
-                sx={{ 
-                  backgroundColor: '#1976d2', 
-                  '&:hover': { backgroundColor: '#0d5aa3' },
-                  py: 1.5,
-                  borderRadius: 1.5,
-                  textTransform: 'none',
-                  fontWeight: 600,
-                  fontSize: '1rem'
-                }}
-              >
-                Go to Therapy Mode →
-              </Button>
+        <Grid container spacing={4} justifyContent="center" alignItems="center">
+          <Grid item xs={12} md={6}>
+            <Paper elevation={3} sx={{ 
+              padding: 4, 
+              textAlign: 'center', 
+              cursor: 'pointer', 
+              backgroundColor: '#1b263b', 
+              '&:hover': { backgroundColor: '#ff6f61', color: '#ffffff' },
+              transition: '0.3s'
+            }} onClick={() => handleNavigate('therapy')}>
+              <FavoriteIcon sx={{ fontSize: 40, color: '#ff6f61' }} />
+              <Typography variant="h5" fontWeight={600} mt={2}>Therapy Mode</Typography>
+              <Typography variant="body2" sx={{ color: '#a0aec0' }}>Personalized exercises and guided therapy for your knee recovery journey.</Typography>
             </Paper>
           </Grid>
-
-          {/* Saviour Mode */}
-          <Grid item xs={12} md={6} lg={5}>
-            <Paper 
-              elevation={isLaptop ? 2 : 1} 
-              sx={{ 
-                p: { xs: 3, md: 4 }, 
-                borderRadius: 2,
-                height: '100%',
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
-                }
-              }}
-            >
-              <Box display="flex" alignItems="center" mb={2}>
-                <ShieldIcon sx={{ color: '#2e7d32', mr: 1.5, fontSize: 28 }} />
-                <Typography variant="h5" fontWeight="700" color="#1a2c42">
-                  Saviour Mode
-                </Typography>
-              </Box>
-              <Typography variant="body1" color="#637381" fontWeight="500" mb={2}>
-                Real-time monitoring with intelligent AI assistance.
-              </Typography>
-              <Typography variant="body2" color="#637381" mb={4} sx={{ lineHeight: 1.6 }}>
-                Monitor your knee movements in real-time, receive instant feedback on technique, and interact with our advanced AI chatbot for personalized guidance and preventative support during your exercises.
-              </Typography>
-              <Button
-                fullWidth
-                variant="outlined"
-                size="large"
-                onClick={() => navigate('/saviour')} // 🔁 Navigate on click
-                sx={{ 
-                  color: '#2e7d32', 
-                  borderColor: '#2e7d32', 
-                  '&:hover': { backgroundColor: 'rgba(46, 125, 50, 0.04)', borderColor: '#2e7d32' },
-                  py: 1.5,
-                  borderRadius: 1.5,
-                  textTransform: 'none',
-                  fontWeight: 600,
-                  fontSize: '1rem'
-                }}
-              >
-                Go to Saviour Mode →
-              </Button>
+          <Grid item xs={12} md={6}>
+            <Paper elevation={3} sx={{ 
+              padding: 4, 
+              textAlign: 'center', 
+              cursor: 'pointer', 
+              backgroundColor: '#1b263b', 
+              '&:hover': { backgroundColor: '#1976d2', color: '#ffffff' },
+              transition: '0.3s'
+            }} onClick={() => handleNavigate('saviour')}>
+              <ShieldIcon sx={{ fontSize: 40, color: '#1976d2' }} />
+              <Typography variant="h5" fontWeight={600} mt={2}>Saviour Mode</Typography>
+              <Typography variant="body2" sx={{ color: '#a0aec0' }}>Emergency alerts, fall detection, and immediate assistance during recovery.</Typography>
             </Paper>
           </Grid>
         </Grid>
 
-        {/* Footer */}
-        <Box sx={{ textAlign: 'center', mt: 'auto' }}>
-          <Typography variant="body2" sx={{ color: '#637381' }}>
+        <Box sx={{ textAlign: 'center', mt: 'auto', py: 4 }}>
+          <Typography variant="body2" sx={{ color: '#a0aec0' }}>
             © 2025 KneeAI Technologies. All rights reserved.
           </Typography>
         </Box>

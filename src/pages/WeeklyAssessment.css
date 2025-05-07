@@ -1,0 +1,106 @@
+.assessment-container {
+    min-height: 100vh;
+    background-color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .error-text {
+    color: #ff4d4d;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .metric-card {
+    padding: 2rem;
+    text-align: center;
+    background-color: #16213e;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
+  }
+  
+  .metric-card:hover {
+    background-color: #0f3460;
+    transform: scale(1.05);
+  }
+  
+  .tooltip {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 0.5rem;
+  }
+  
+  .progress-section {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .status-text {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #e94560;
+  }
+  
+  .progress-bar {
+    height: 12px;
+    border-radius: 6px;
+    background-color: #00a8cc;
+    transition: width 0.5s;
+  }
+  
+  .progress-bar.low {
+    background-color: #00ff85;
+  }
+  
+  .progress-bar.medium {
+    background-color: #ffcc00;
+  }
+  
+  .progress-bar.high {
+    background-color: #ff4d4d;
+  }
+  
+  .fetch-button {
+    background-color: #00a8cc;
+    color: #ffffff;
+    padding: 0.8rem 1.5rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .fetch-button:hover {
+    background-color: #007b9e;
+    transform: scale(1.05);
+  }
+  
+  .fetch-button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+  }
+  
+  .graph-container {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #16213e;
+    border-radius: 15px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .graph-title {
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  

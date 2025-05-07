@@ -1,0 +1,83 @@
+.saviour-container {
+  min-height: 100vh;
+   background: linear-gradient(145deg, #0f172a, #1e293b);
+   color: #e2e8f0;
+   padding: 2rem;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+ 
+ .saviour-title {
+   font-size: 2.8rem;
+   font-weight: 700;
+   text-align: center;
+   margin-bottom: 2.5rem;
+   color: #38bdf8;
+   text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+ }
+ 
+ /* Chart card styling */
+ .chart-card {
+   background-color: #1e293b;
+   border-radius: 1.2rem;
+   padding: 1.5rem;
+   box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+   margin-bottom: 3rem;
+ }
+ 
+ .chart-header {
+   display: flex;
+   align-items: center;
+   gap: 0.75rem;
+   margin-bottom: 1rem;
+   color: #38bdf8;
+ }
+ 
+ .chart-icon {
+   color: #38bdf8;
+ }
+ 
+ /* Option cards */
+ .options-section {
+   display: flex;
+   flex-direction: row;
+   gap: 1.5rem;
+   justify-content: center;
+   flex-wrap: wrap;
+ }
+ 
+ .option-card {
+   flex: 1 1 300px;
+   max-width: 400px;
+   background-color: #0f172a;
+   border: 1px solid #334155;
+   border-radius: 1rem;
+   padding: 1.5rem;
+   transition: all 0.3s ease;
+   cursor: pointer;
+   text-align: center;
+   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+ }
+ 
+ .option-card:hover {
+   transform: translateY(-6px) scale(1.02);
+   box-shadow: 0 8px 25px rgba(56, 189, 248, 0.4);
+   border-color: #38bdf8;
+ }
+ 
+ .option-card h2 {
+   font-size: 1.6rem;
+   color: #38bdf8;
+   margin: 0.75rem 0;
+ }
+ 
+ .option-card p {
+   color: #cbd5e1;
+   font-size: 1rem;
+   line-height: 1.5;
+ }
+ 
+ .card-icon {
+   color: #38bdf8;
+   margin-bottom: 0.5rem;
+ }
+ 
