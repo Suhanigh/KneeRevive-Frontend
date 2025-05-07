@@ -1,0 +1,139 @@
+.therapy-mode {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: 'Inter', sans-serif;
+  background-color: #f0f2f5;
+  color: #2d3748;
+}
+
+.therapy-mode h1 {
+  color: #1a202c;
+  margin-bottom: 24px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.therapy-status-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+  max-width: 550px;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.therapy-status-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.status-row span {
+  color: #4a5568;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-row span:last-child {
+  color: #1a202c;
+  font-weight: 600;
+}
+
+.action-button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+  font-size: 16px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.action-button.start {
+  background-color: #3182ce;
+}
+
+.action-button.start:hover {
+  background-color: #2b6cb0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.action-button.stop {
+  background-color: #e53e3e;
+}
+
+.action-button.stop:hover {
+  background-color: #c53030;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 32px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.duration-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #3182ce;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.duration-slider::-webkit-slider-thumb:hover {
+  background: #2b6cb0;
+}
+
+.preset-button.selected {
+  background-color: #3182ce;
+  color: #ffffff;
+}
+
+.preset-button.selected:hover {
+  background-color: #2b6cb0;
+}
+
+.continue-button {
+  background-color: #3182ce;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.continue-button:hover {
+  background-color: #2b6cb0;
+}

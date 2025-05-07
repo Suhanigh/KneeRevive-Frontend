@@ -7,6 +7,7 @@ import Login from "./Login";
 import Signup from "./Signup"; 
 import PrivateRoute from "./components/PrivateRoute";
 import WeeklyAssessment from "./pages/weekly-assesment";
+import TherapyMode from "./pages/TherapyMode";
 
 function App() {
   const isAuthenticated = !!localStorage.getItem("authToken");
@@ -32,6 +33,14 @@ function App() {
           element={
             <PrivateRoute isAuthenticated={isAuthenticated}>
               <SaviourMode />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/therapy"
+          element={
+            <PrivateRoute isAuthenticated={isAuthenticated}>
+              <TherapyMode />
             </PrivateRoute>
           }
         />

@@ -7,6 +7,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebase';
+import TherapyMode from './pages/TherapyMode';
 
 const ModeSelection = () => {
   const theme = useTheme();
